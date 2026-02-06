@@ -4,7 +4,7 @@ from io import StringIO
 
 # 1. API Configuration
 # Replace with your actual API key from Google AI Studio
-API_KEY = "AIzaSyAcmwV_PWcku7wCKJdj76WxNEWqt-ENJJc" 
+API_KEY = "AIzaSyApPQv5Tv6_wGt7JEo4k4Ct1F5CmDP6rDw" 
 genai.configure(api_key=API_KEY)
 
 # 2. Supported Languages (Expanded to 15+)
@@ -86,7 +86,4 @@ def main():
             st.rerun()
 
 if __name__ == "__main__":
-
     main()
-
-
