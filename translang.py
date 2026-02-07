@@ -6,7 +6,7 @@ from io import StringIO
 # Replace with your actual API key from Google AI Studio
 # Securely fetch the key from Streamlit's secrets vault
 try:
-    API_KEY = st.secrets["GOOGLE_API_KEY"]
+    API_KEY = st.secrets["GEMINI_API_KEY"]
     genai.configure(api_key=API_KEY)
 except Exception as e:
     st.error("API Key not found in Secrets. Please check your Streamlit settings.")
