@@ -4,7 +4,7 @@ from io import StringIO
 
 # 1. API Configuration
 # Replace with your actual API key from Google AI Studio
-API_KEY = "YOUR_API_KEY" 
+API_KEY = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=API_KEY)
 
 # 2. Supported Languages (Expanded to 15+)
