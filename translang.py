@@ -4,7 +4,8 @@ from io import StringIO
 
 # 1. API Configuration
 # Replace with your actual API key from Google AI Studio
-API_KEY = st.secrets["GOOGLE_API_KEY"]
+# Change "GOOGLE_API_KEY" to "GEMINI_API_KEY" to match your dashboard
+API_KEY = st.secrets["GEMINI_API_KEY"]
 genai.configure(api_key=API_KEY)
 
 # 2. Supported Languages (Expanded to 15+)
