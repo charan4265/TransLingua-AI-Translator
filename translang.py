@@ -81,13 +81,23 @@ with col2:
     btn_col1, btn_col2, _ = st.columns([1, 1, 4])
     
     with btn_col1:
-        if st.button("🚀 Translate"):
-            if input_text.strip():
-                with st.spinner(f"Translating to {tar}..."):
-                    result = translate_text(input_text, src, tar)
-                    
-                    st.subheader("Translation Result:")
-                    st.success(result)
+        # --- STEP 1: Define the variables before the button ---
+# This tells the computer what 'src' and 'tar' mean
+src = st.selectbox("Select Source Language", languages, index=0)
+tar = st.selectbox("Select Target Language", languages, index=1)
+
+# --- STEP 2: The Button Logic ---
+if st.button("🚀 Translate"):
+    if input_text.strip():  # Check if the user typed something
+        with st.spinner(f"Translating to {tar}..."):
+            # We use 'src' and 'tar' here
+            result = translate_text(input_text, src, tar)
+            
+            # Save the result so it shows in the right box
+            st.session_state.translated_text = result
+            st.rerun()
+    else:
+        st.warning("Please enter some text to translate!")
                     
                     # EXTRA FEATURE: Download Output
                     st.download_button(
