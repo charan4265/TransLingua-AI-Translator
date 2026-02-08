@@ -61,44 +61,18 @@ def main():
         file_content = stringio.read()
 
     # Input Area
-    # 1. Create two equal-width columns
-col1, col2 = st.columns(2)
-
-# 2. Add the Input box to the Left Column
-with col1:
-    st.markdown("### 📝 Input")
-    input_text = st.text_area("Enter text to translate", height=300, key="input_box")
-
-# 3. Add the Output box to the Right Column
-with col2:
-    st.markdown("### 🎯 Result")
-    # If a translation exists, show it; otherwise, show a placeholder
-    if 'translated_text' not in st.session_state:
-        st.session_state.translated_text = ""
-    
-    st.text_area("Translation", value=st.session_state.translated_text, height=300, disabled=True, key="output_box")
+   input_text = st.text_area("Enter Text:", value=file_content, height=200, placeholder="Type here or upload a file...")
     # Action Buttons
     btn_col1, btn_col2, _ = st.columns([1, 1, 4])
     
     with btn_col1:
-        # --- STEP 1: Define the variables before the button ---
-# This tells the computer what 'src' and 'tar' mean
-src = st.selectbox("Select Source Language", languages, index=0)
-tar = st.selectbox("Select Target Language", languages, index=1)
-
-# --- STEP 2: The Button Logic ---
-if st.button("🚀 Translate"):
-    if input_text.strip():  # Check if the user typed something
-        with st.spinner(f"Translating to {tar}..."):
-            # We use 'src' and 'tar' here
-            result = translate_text(input_text, src, tar)
-            
-            # Save the result so it shows in the right box
-            st.session_state.translated_text = result
-            st.rerun()
-    else:
-        st.warning("Please enter some text to translate!")
+        if st.button("🚀 Translate"):
+            if input_text.strip():
+                with st.spinner(f"Translating to {tar}..."):
+                    result = translate_text(input_text, src, tar)
                     
+                    st.subheader("Translation Result:")
+                    st.success(result)
                     # EXTRA FEATURE: Download Output
                     st.download_button(
                         label="💾 Download Translation",
