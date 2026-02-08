@@ -1,0 +1,15 @@
+[theme]
+# The color of buttons and sliders
+primaryColor = "#00FFAA" 
+
+# The main background color (Dark mode)
+backgroundColor = "#0E1117" 
+
+# The color of the sidebar
+secondaryBackgroundColor = "#1E2129" 
+
+# Clean white text for readability
+textColor = "#FAFAFA" 
+
+# Professional font choice
+font = "sans serif"
