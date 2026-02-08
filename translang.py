@@ -60,31 +60,40 @@ def main():
     # Input Area
     input_text = st.text_area("Enter Text:", value=file_content, height=200, placeholder="Type here or upload a file...")
 
-    # Action Buttons
-    btn_col1, btn_col2, _ = st.columns([1, 1, 4])
-    
-    with btn_col1:
-        if st.button("🚀 Translate"):
-            if input_text.strip():
-                with st.spinner(f"Translating to {tar}..."):
-                    result = translate_text(input_text, src, tar)
-                    
-                    st.subheader("Translation Result:")
-                    st.success(result)
-                    
-                    # EXTRA FEATURE: Download Output
-                    st.download_button(
-                        label="💾 Download Translation",
-                        data=result,
-                        file_name=f"translated_{tar}.txt",
-                        mime="text/plain"
-                    )
-            else:
-                st.warning("Please provide text or a file.")
+  # 5. Action Buttons & Display Logic
+    if st.button("🚀 Translate"):
+        if input_text.strip():
+            with st.spinner(f"Translating to {tar}..."):
+                # Run the translation
+                result = translate_text(input_text, src, tar)
+                
+                # Save to session state so it stays on screen
+                st.session_state.translated_result = result
+        else:
+            st.warning("Please provide text or a file.")
 
-    with btn_col2:
-        if st.button("🧹 Clear"):
-            st.rerun()
+    if st.button("🧹 Clear"):
+        st.session_state.translated_result = ""
+        st.rerun()
 
-if __name__ == "__main__":
-    main()
+    st.divider()
+
+    # 6. Horizontal Result Box (Full Width)
+    if "translated_result" in st.session_state and st.session_state.translated_result:
+        st.subheader("🎯 Translation Result:")
+        
+        # This text_area gives you the clean horizontal look you want
+        st.text_area(
+            label="Translated Text", 
+            value=st.session_state.translated_result, 
+            height=300, 
+            key="output_box"
+        )
+        
+        # Download button placed clearly below the result
+        st.download_button(
+            label="📥 Download Translation",
+            data=st.session_state.translated_result,
+            file_name=f"translated_{tar}.txt",
+            mime="text/plain"
+        )
