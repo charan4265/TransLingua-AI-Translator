@@ -4,12 +4,8 @@ from io import StringIO
 
 # 1. API Configuration
 # Replace with your actual API key from Google AI Studio
-# Securely fetch the key from Streamlit's secrets vault
-try:
-    API_KEY = st.secrets["GEMINI_API_KEY"]
-    genai.configure(api_key=API_KEY)
-except Exception as e:
-    st.error("API Key not found in Secrets. Please check your Streamlit settings.")
+API_KEY = "YOUR_API_KEY" 
+genai.configure(api_key=API_KEY)
 
 # 2. Supported Languages (Expanded to 15+)
 languages = [
@@ -61,7 +57,8 @@ def main():
         file_content = stringio.read()
 
     # Input Area
-   input_text = st.text_area("Enter Text:", value=file_content, height=200, placeholder="Type here or upload a file...")
+    input_text = st.text_area("Enter Text:", value=file_content, height=200, placeholder="Type here or upload a file...")
+
     # Action Buttons
     btn_col1, btn_col2, _ = st.columns([1, 1, 4])
     
@@ -73,6 +70,7 @@ def main():
                     
                     st.subheader("Translation Result:")
                     st.success(result)
+                    
                     # EXTRA FEATURE: Download Output
                     st.download_button(
                         label="💾 Download Translation",
